@@ -16,9 +16,9 @@ function criaTempo(t1,t2) {
             card.appendChild(iniciar);
             return card;
         },
-        timer(tempo, callback){
+        timer(tempo){
             let segundos = 0;
-            const audio = new Audio('https://www.youtube.com/watch?v=VDvFcn6icXo');
+            const audio = new Audio('assets/audio/alarme.mp3');
             function minuto(seg){
                 let minutos = seg/60;
                 return minutos;
@@ -26,16 +26,16 @@ function criaTempo(t1,t2) {
             const timer = setInterval(function (){
                 segundos++;
                 console.log(segundos);
-                if (tempo = minuto(segundos)) {
+                if (tempo <= minuto(segundos)) {
+                    limpaInterval(timer)
                     audio.play();
-                    if(callback) callback();
-                    else return;
                 }
             },1000);
+            const limpaInterval = timer => clearInterval(timer);
         },
         
         iniciaTimer(){
-            this.timer(this.tempo1, this.timer(this.tempo2));
+            this.timer(this.tempo1);
         }
     }
 }
