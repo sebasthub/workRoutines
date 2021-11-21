@@ -2,7 +2,7 @@
   const tempos = []; 
   const content = document.querySelector('.content');
   iniciaPrograma()
-  document.addEventListener('click',function (e){ //geito correto de se usar botões
+  document.addEventListener('click',function (e){
     const el = e.target;
     if(el.classList.contains('chama-criador')){
       console.log('apertado');
@@ -23,7 +23,9 @@
       for (let i = 0; i < tempos.length; i++) {
         if(el.classList.contains(`id=${i}`)){
           const tempo = tempos[i];
-          tempo.iniciaTimer();
+          timer(tempo.tempo1,function () {
+            timer(tempo.tempo2);
+          });
         }
       }
     }
@@ -35,9 +37,28 @@
       counter++;
     }
   }
+  function timer(tempo, callBack){
+    let segundos = 0;
+    const audio = new Audio('assets/audio/alarme.mp3');
+    function minuto(seg){
+        let minutos = seg/60;
+        return minutos;
+    }
+    const timer = setInterval(function (){
+        segundos++;
+        console.log(segundos);
+        if (tempo <= minuto(segundos)) {
+            limpaInterval(timer);
+            audio.play();
+            return funcao = !callBack ? null : callBack();
+        }
+    },1000);
+    const limpaInterval = timer => clearInterval(timer);
+}
   function capturarTempos() {
     const tempoUm = document.querySelector('.primeiro-tempo');
     const tempoDois = document.querySelector('.segundo-tempo');
     tempos.push(criaTempo(Number(tempoUm.value),Number(tempoDois.value)));
   }
+  
 })();
