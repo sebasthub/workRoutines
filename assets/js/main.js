@@ -32,10 +32,13 @@
   })
   function iniciaPrograma() {
     let counter = 0;
+    const divTimers = criaTag('div');
+    divTimers.classList.add("divTimers");
     for (const obj of tempos) {
-      content.appendChild(obj.tempoHtml(counter));
+      divTimers.appendChild(obj.tempoHtml(counter));
       counter++;
     }
+    content.appendChild(divTimers);
   }
   function timer(tempo, callBack){
     let segundos = 0;

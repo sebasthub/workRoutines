@@ -5,7 +5,7 @@
 }
 .card-tempo{
     width: 10rem;
-    margin: 1rem;
+    margin: 0.5rem;
 }
 .card-tempo p {
     text-align: center;
@@ -38,4 +38,9 @@
 }
 .content{
     flex-direction: row;
+}
+
+.divTimers{
+    display: flex;
+    flex-wrap: wrap;
 }
