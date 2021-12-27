@@ -8,6 +8,7 @@ function criaCriador() {
     const inputs = criaTag('div');
     inputs.classList.add("inputs");
     criador.classList.add("criador");
+    criador.classList.add("sobrepor");
     cardCriador.classList.add("card-criador");
     cardCriador.classList.add("card");
     criarRotina.innerText = 'criar rotina';
@@ -23,6 +24,28 @@ function criaCriador() {
 function removeCriador() {
     const criar = document.querySelector('.criador');
     criar.remove();
+}
+function timerVisualizadorHTML() {
+  const timerDiv = criaTag('div');
+  const timerCard = criaTag('div');
+  const rotinaIniciada = criaTag('h5');
+  const progresso = criaTag('div');
+  //progresso.classList.add("progress");
+  timerDiv.classList.add("timerDiv");
+  timerDiv.classList.add("sobrepor");
+  timerCard.classList.add("timer-card");
+  timerCard.classList.add("card");
+  rotinaIniciada.innerText = 'rotina iniciada';
+  progresso.appendChild(criarProgessBar('t1'));
+  progresso.appendChild(criarProgessBar('t2'));
+  timerCard.appendChild(rotinaIniciada);
+  timerCard.appendChild(progresso);
+  timerDiv.appendChild(timerCard);
+  return timerDiv;
+}
+function removeTimerVisualizador() {
+  const timerDiv = document.querySelector('.timerDiv');
+  timerDiv.remove();
 }
 function criaInput(nome,classe,tipo = 'text') {
     const div = document.createElement('div');
@@ -47,6 +70,17 @@ function criaButton(text,type,...clases) {
         button.classList.add(classe);
     }
       return button;
+}
+function criarProgessBar(nome) {
+  const div = criaTag('div');
+  const progress = criaTag('progress');
+  const pnome = criaTag('p');
+  pnome.innerText = nome;
+  progress.classList.add(`progresso`);
+  progress.classList.add(nome);
+  div.appendChild(pnome);
+  div.appendChild(progress);
+  return div;
 }
 /* estrutura do criador de timers
 <div class="criador">

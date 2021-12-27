@@ -19,11 +19,12 @@
       console.log(tempos);
     }
     if(el.classList.contains('iniciar')){
+      content.appendChild(timerVisualizadorHTML())
       for (let i = 0; i < tempos.length; i++) {
         if(el.classList.contains(`id=${i}`)){
           const tempo = tempos[i];
-          timer(tempo.tempo1,function () {
-            timer(tempo.tempo2);
+          timer(tempo.tempo1,'t1',function () {
+            timer(tempo.tempo2,'t2');
           });
         }
       }
@@ -38,20 +39,32 @@
       counter++;
     }
   }
-  function timer(tempo, callBack){
-    if(tempo <= 0) return;
+  function timer(tempo, contador, callBack){
+    const progresso = document.querySelector(`.${contador}`);
+    if(tempo <= 0){
+      removeTimerVisualizador();
+      return
+    }
     let segundos = 0;
     const audio = new Audio('assets/audio/alarme.mp3');
     function minuto(seg){
         let minutos = seg/60;
         return minutos;
     }
+    function seg(min) {
+      let segundos = min*60;
+      return segundos;
+    }
+    progresso.max = seg(tempo);
+    progresso.value = 0;
     const timer = setInterval(function (){
         segundos++;
         console.log(segundos);
+        progresso.value = segundos;
         if (tempo <= minuto(segundos)) {
             limpaInterval(timer);
             audio.play();
+            if(callBack == null) removeTimerVisualizador();
             return funcao = !callBack ? null : callBack();
         }
     },1000);
