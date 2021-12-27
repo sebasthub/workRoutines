@@ -6,7 +6,6 @@
     const el = e.target;
     if(el.classList.contains('chama-criador')){
       console.log('apertado');
-      content.innerHTML = '';
       content.appendChild(criaCriador());
     }
     if(el.classList.contains('cancelar-criar')){
@@ -32,13 +31,12 @@
   })
   function iniciaPrograma() {
     let counter = 0;
-    const divTimers = criaTag('div');
-    divTimers.classList.add("divTimers");
+    const divTimers = document.querySelector('.divTimers');
+    divTimers.innerHTML = '';
     for (const obj of tempos) {
       divTimers.appendChild(obj.tempoHtml(counter));
       counter++;
     }
-    content.appendChild(divTimers);
   }
   function timer(tempo, callBack){
     let segundos = 0;
