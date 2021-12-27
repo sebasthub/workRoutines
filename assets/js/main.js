@@ -13,7 +13,7 @@
       iniciaPrograma();
     }
     if(el.classList.contains('criar')){
-      capturarTempos();
+      if(capturarTempos() == null) return null;
       removeCriador();
       iniciaPrograma();
       console.log(tempos);
@@ -39,6 +39,7 @@
     }
   }
   function timer(tempo, callBack){
+    if(tempo <= 0) return;
     let segundos = 0;
     const audio = new Audio('assets/audio/alarme.mp3');
     function minuto(seg){
@@ -59,7 +60,9 @@
   function capturarTempos() {
     const tempoUm = document.querySelector('.primeiro-tempo');
     const tempoDois = document.querySelector('.segundo-tempo');
+    if (tempoUm.value <= 0) return null;
     tempos.push(criaTempo(Number(tempoUm.value),Number(tempoDois.value)));
+    return true;
   }
   
 })();
