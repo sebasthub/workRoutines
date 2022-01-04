@@ -6,19 +6,22 @@
     const el = e.target;
     if(el.classList.contains('chama-criador')){
       console.log('apertado');
+      manipulaFundoPreto(true,content);
       content.appendChild(criaCriador());
     }
     if(el.classList.contains('cancelar-criar')){
       removeCriador();
-      iniciaPrograma();
+      manipulaFundoPreto(false);
     }
     if(el.classList.contains('criar')){
       if(capturarTempos() == null) return null;
       removeCriador();
+      manipulaFundoPreto(false);
       iniciaPrograma();
       console.log(tempos);
     }
     if(el.classList.contains('iniciar')){
+      manipulaFundoPreto(true,content);
       content.appendChild(timerVisualizadorHTML())
       for (let i = 0; i < tempos.length; i++) {
         if(el.classList.contains(`id=${i}`)){
@@ -43,6 +46,7 @@
     const progresso = document.querySelector(`.${contador}`);
     if(tempo <= 0){
       removeTimerVisualizador();
+      manipulaFundoPreto(false);
       return
     }
     let segundos = 0;
@@ -64,8 +68,12 @@
         if (tempo <= minuto(segundos)) {
             limpaInterval(timer);
             audio.play();
-            if(callBack == null) removeTimerVisualizador();
-            return funcao = !callBack ? null : callBack();
+            if(callBack == null){
+              removeTimerVisualizador();
+              manipulaFundoPreto(false);
+              return null
+            }
+            return callBack();
         }
     },1000);
     const limpaInterval = timer => clearInterval(timer);

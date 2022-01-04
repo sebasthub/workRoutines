@@ -82,6 +82,17 @@ function criarProgessBar(nome) {
   div.appendChild(progress);
   return div;
 }
+function manipulaFundoPreto(interruptor,recebedor) {
+  if(interruptor === true){
+    const fundo = document.createElement('div');
+    fundo.classList.add('fundoPreto');
+    recebedor.appendChild(fundo);
+  }else{
+    const fundoPreto = document.querySelector('.fundoPreto');
+    fundoPreto.remove();
+  }
+}
+
 /* estrutura do criador de timers
 <div class="criador">
       <div class="card card-criador">
