@@ -1,7 +1,7 @@
 .card-criador{
     max-width: 35rem;
     position: relative;
-    margin-top: 1rem;
+    margin: 1rem;
 }
 .card-tempo{
     width: 10rem;
@@ -75,4 +75,9 @@
     position: absolute;
     background-color: black;
     opacity: 0.7;
+}
+.alert{
+    margin: 4px;
+    text-align: center;
+    padding: 4px;
 }

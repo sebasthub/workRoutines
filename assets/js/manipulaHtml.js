@@ -6,6 +6,7 @@ function criaCriador() {
     const cardCriador = criaTag('div');
     const criarRotina = criaTag('h5');
     const inputs = criaTag('div');
+    const alerta = warningHTML('Os timers são em minutos');
     inputs.classList.add("inputs");
     criador.classList.add("criador");
     criador.classList.add("sobrepor");
@@ -17,6 +18,7 @@ function criaCriador() {
     inputs.appendChild(criaButton('criar','submit','btn','btn-outline-success','criar'));
     inputs.appendChild(criaButton('cancelar','submit','btn','btn-outline-danger','cancelar-criar'));
     cardCriador.appendChild(criarRotina);
+    cardCriador.appendChild(alerta);
     cardCriador.appendChild(inputs);
     criador.appendChild(cardCriador);
     return criador;
@@ -91,6 +93,14 @@ function manipulaFundoPreto(interruptor,recebedor) {
     const fundoPreto = document.querySelector('.fundoPreto');
     fundoPreto.remove();
   }
+}
+function warningHTML(texto) {
+  const warning = criaTag('div');
+  warning.classList.add('alert');
+  warning.classList.add('alert-warning');
+  warning.role = "alert";
+  warning.innerText = texto;
+  return warning;
 }
 
 /* estrutura do criador de timers
