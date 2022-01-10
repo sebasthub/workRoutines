@@ -1,13 +1,16 @@
 (function() {
   const tempos = []; 
   const content = document.querySelector('.content');
+  let trava = false;
   iniciaPrograma()
   document.addEventListener('click',function (e){
     const el = e.target;
     if(el.classList.contains('chama-criador')){
       console.log('apertado');
-      manipulaFundoPreto(true,content);
-      content.appendChild(criaCriador());
+      if(!trava){
+        manipulaFundoPreto(true,content);
+        content.appendChild(criaCriador());
+      }
     }
     if(el.classList.contains('cancelar-criar')){
       removeCriador();
@@ -21,6 +24,7 @@
       console.log(tempos);
     }
     if(el.classList.contains('iniciar')){
+      trava = true;
       manipulaFundoPreto(true,content);
       content.appendChild(timerVisualizadorHTML())
       for (let i = 0; i < tempos.length; i++) {
@@ -31,6 +35,7 @@
           });
         }
       }
+      
     }
   })
   function iniciaPrograma() {
@@ -47,6 +52,7 @@
     if(tempo <= 0){
       removeTimerVisualizador();
       manipulaFundoPreto(false);
+      trava = false;
       return
     }
     let segundos = 0;
@@ -69,6 +75,8 @@
             limpaInterval(timer);
             audio.play();
             if(callBack == null){
+              trava = false;
+              console.log(trava);
               removeTimerVisualizador();
               manipulaFundoPreto(false);
               return null
