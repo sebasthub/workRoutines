@@ -6,13 +6,14 @@ function criaCriador() {
     const cardCriador = criaTag('div');
     const criarRotina = criaTag('h5');
     const inputs = criaTag('div');
-    const alerta = warningHTML('Os timers são em minutos');
+    const alerta = warningHTML('Os timers são em minutos!');
     inputs.classList.add("inputs");
     criador.classList.add("criador");
     criador.classList.add("sobrepor");
     cardCriador.classList.add("card-criador");
     cardCriador.classList.add("card");
     criarRotina.innerText = 'criar rotina';
+    inputs.appendChild(criaInput('indentificador','nome','text'));
     inputs.appendChild(criaInput('primeiro tempo','primeiro-tempo','number'));
     inputs.appendChild(criaInput('segundo tempo','segundo-tempo','number'));
     inputs.appendChild(criaButton('criar','submit','btn','btn-outline-success','criar'));
@@ -38,10 +39,11 @@ function timerVisualizadorHTML() {
   timerCard.classList.add("timer-card");
   timerCard.classList.add("card");
   rotinaIniciada.innerText = 'rotina iniciada';
-  progresso.appendChild(criarProgessBar('t1'));
-  progresso.appendChild(criarProgessBar('t2'));
+  progresso.appendChild(criarProgessBar('t1','tempo1'));
+  progresso.appendChild(criarProgessBar('t2','tempo2'));
   timerCard.appendChild(rotinaIniciada);
   timerCard.appendChild(progresso);
+  timerCard.appendChild(criaButton('cancelar','submit','btn','btn-outline-danger','cancelar-timer'))
   timerDiv.appendChild(timerCard);
   return timerDiv;
 }
@@ -73,11 +75,11 @@ function criaButton(text,type,...clases) {
     }
       return button;
 }
-function criarProgessBar(nome) {
+function criarProgessBar(nome,texto) {
   const div = criaTag('div');
   const progress = criaTag('progress');
   const pnome = criaTag('p');
-  pnome.innerText = nome;
+  pnome.innerText = texto;
   progress.classList.add(`progresso`);
   progress.classList.add(nome);
   div.appendChild(pnome);

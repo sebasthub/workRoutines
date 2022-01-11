@@ -16,6 +16,9 @@
       removeCriador();
       manipulaFundoPreto(false);
     }
+    if(el.classList.contains('cancelar-timer')){
+      window.location.href = "index.html";
+    }
     if(el.classList.contains('criar')){
       if(capturarTempos() == null) return null;
       removeCriador();
@@ -87,10 +90,11 @@
     const limpaInterval = timer => clearInterval(timer);
 }
   function capturarTempos() {
+    const nome = document.querySelector('.nome');
     const tempoUm = document.querySelector('.primeiro-tempo');
     const tempoDois = document.querySelector('.segundo-tempo');
     if (tempoUm.value <= 0) return null;
-    tempos.push(criaTempo(Number(tempoUm.value),Number(tempoDois.value)));
+    tempos.push(criaTempo(nome.value,Number(tempoUm.value),Number(tempoDois.value)));
     return true;
   }
   
