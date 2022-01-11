@@ -1,6 +1,6 @@
 (function() {
-  const tempos = []; 
   const content = document.querySelector('.content');
+  let tempos = load('tempos') != null ? load('tempos') : [];
   let trava = false;
   iniciaPrograma()
   document.addEventListener('click',function (e){
@@ -20,10 +20,12 @@
       window.location.href = "index.html";
     }
     if(el.classList.contains('criar')){
+      console.log(tempos);
       if(capturarTempos() == null) return null;
       removeCriador();
       manipulaFundoPreto(false);
       iniciaPrograma();
+      save('tempos',tempos);
       console.log(tempos);
     }
     if(el.classList.contains('iniciar')){
@@ -45,11 +47,15 @@
     let counter = 0;
     const divTimers = document.querySelector('.divTimers');
     divTimers.innerHTML = '';
-    for (const obj of tempos) {
-      divTimers.appendChild(obj.tempoHtml(counter));
-      counter++;
+    console.log(tempos);
+    if (tempos){
+      for (const obj of tempos) {
+        divTimers.appendChild(tempoHtml(obj.nome,obj.tempo1,obj.tempo2,counter));
+        counter++;
+      }
     }
   }
+  
   function timer(tempo, contador, callBack){
     const progresso = document.querySelector(`.${contador}`);
     if(tempo <= 0){
@@ -97,5 +103,23 @@
     tempos.push(criaTempo(nome.value,Number(tempoUm.value),Number(tempoDois.value)));
     return true;
   }
-  
+  function save(id,salvo) {
+    const item = JSON.stringify(salvo);
+    localStorage.setItem(id, item);
+  }
+  function load(id) {
+    try{
+      const item = localStorage.getItem(id);
+      return JSON.parse(item);
+    }catch{
+      return null;
+    }
+  }
+  function criaTempo(nome,t1,t2) {
+    return{
+        nome:nome,
+        tempo1:t1,
+        tempo2:t2,
+    }
+}
 })();

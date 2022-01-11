@@ -104,6 +104,25 @@ function warningHTML(texto) {
   warning.innerText = texto;
   return warning;
 }
+function tempoHtml(nome,tempo1,tempo2,conter){
+  const card = criaTag('div');
+  const temp1 = criaTag('p');
+  const n = criaTag('h5');
+  n.innerText = nome;
+  card.classList.add('card');
+  card.classList.add('card-tempo');
+  const iniciar = criaButton('iniciar','button','btn','btn-outline-dark',`id=${conter}`,'iniciar');
+  temp1.innerText = `tempo1: ${tempo1} min`;
+  card.appendChild(n);
+  card.appendChild(temp1);
+  if(tempo2 > 0){
+      const temp2 = criaTag('p');
+      temp2.innerText = `tempo2: ${tempo2} min`;
+      card.appendChild(temp2);
+  }
+  card.appendChild(iniciar);
+  return card;
+}
 
 /* estrutura do criador de timers
 <div class="criador">
