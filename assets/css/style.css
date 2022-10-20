@@ -90,3 +90,17 @@
     padding: 0.5rem;
     margin: 10px;
 }
+
+.chama-criador {
+    position: fixed;
+    left: 85%;
+    bottom: 10%;
+    width: 120pt;
+    height: 50pt;
+    text-align: center;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12pt;
+}
