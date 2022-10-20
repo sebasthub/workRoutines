@@ -104,3 +104,8 @@
     align-items: center;
     font-size: 12pt;
 }
+
+.login{
+    border: none;
+    background-color: #F8F9FA;
+}
