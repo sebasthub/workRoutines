@@ -1,7 +1,7 @@
 (function() {
   const content = document.querySelector('.content');
-  let tempos = load('tempos') != null ? load('tempos') : [];
   let user = load('usuario') != null ? load('usuario') : null;
+  let tempos = buscarTempos(user.id) != null ? buscarTempos(user.id) : [];
   let trava = false;
   iniciaPrograma()
   document.addEventListener('click',function (e){
@@ -149,8 +149,7 @@ function login(complemento){
   let json = JSON.parse(xhttp.responseText);
   user = criaUser(json.id,json.usuario);
   save('usuario',user);
-  save('tempos',json.tempos);
-  console.log(user);
+  window.location.href = "index.html";
 }
 function postTempo (tempo){
   var url = `http://localhost:8080/tempos`;
@@ -160,5 +159,15 @@ function postTempo (tempo){
   xhttp.setRequestHeader("Accept", "application/json");
   xhttp.setRequestHeader("Content-Type", "application/json");
   xhttp.send(JSON.stringify(tempo));
+}
+function buscarTempos(id) {
+  var url = `http://localhost:8080/tempos/${id}`;//Sua URL
+
+  var xhttp = new XMLHttpRequest();
+  xhttp.open("GET", url, false);
+  xhttp.send();
+  console.log(xhttp.responseText);
+  let json = JSON.parse(xhttp.responseText);
+  return json;
 }
 })();
