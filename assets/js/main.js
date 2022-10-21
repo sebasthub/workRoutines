@@ -149,6 +149,7 @@ function login(complemento){
   let json = JSON.parse(xhttp.responseText);
   user = criaUser(json.id,json.usuario);
   save('usuario',user);
+  save('tempos',json.tempos);
   console.log(user);
 }
 function postTempo (tempo){
