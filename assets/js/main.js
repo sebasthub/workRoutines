@@ -1,7 +1,7 @@
 (function() {
   const content = document.querySelector('.content');
   let tempos = load('tempos') != null ? load('tempos') : [];
-  let user = null;
+  let user = load('usuario') != null ? load('usuario') : null;
   let trava = false;
   iniciaPrograma()
   document.addEventListener('click',function (e){
@@ -147,6 +147,8 @@ function login(complemento){
   console.log(xhttp.responseText);
   let json = JSON.parse(xhttp.responseText);
   user = criaUser(json.id,json.usuario);
+  save('usuario',user);
   console.log(user);
 }
+
 })();
