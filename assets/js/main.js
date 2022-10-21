@@ -1,10 +1,20 @@
 (function() {
   const content = document.querySelector('.content');
   let tempos = load('tempos') != null ? load('tempos') : [];
+  let user = null;
   let trava = false;
   iniciaPrograma()
   document.addEventListener('click',function (e){
     const el = e.target;
+    if(el.classList.contains('logar')){
+      const usuario = document.querySelector('.usuario');
+      const senha = document.querySelector('.senha');
+      login(usuario.value+senha.value);
+    }
+    if(el.classList.contains('Chama-Login')){
+      manipulaFundoPreto(true,content);
+      content.appendChild(criaLogin());
+    }
     if(el.classList.contains('chama-criador')){
       console.log('apertado');
       if(!trava){
@@ -16,7 +26,7 @@
       removeCriador();
       manipulaFundoPreto(false);
     }
-    if(el.classList.contains('cancelar-timer')){
+    if(el.classList.contains('cancelar-timer')) {
       window.location.href = "index.html";
     }
     if(el.classList.contains('criar')){
@@ -121,5 +131,22 @@
         tempo1:t1,
         tempo2:t2,
     }
+  }
+  function criaUser(id,usuario) {
+    return{
+        id:id,
+        usuario:usuario,
+    }
+  }
+function login(complemento){
+  var url = `http://localhost:8080/usuarios/login/${complemento}`;//Sua URL
+
+  var xhttp = new XMLHttpRequest();
+  xhttp.open("GET", url, false);
+  xhttp.send();
+  console.log(xhttp.responseText);
+  let json = JSON.parse(xhttp.responseText);
+  user = criaUser(json.id,json.usuario);
+  console.log(user);
 }
 })();

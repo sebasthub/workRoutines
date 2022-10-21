@@ -124,6 +124,28 @@ function tempoHtml(nome,tempo1,tempo2,conter){
   return card;
 }
 
+function criaLogin() {
+  const login = criaTag('div');
+  const cardCriador = criaTag('div');
+  const criarRotina = criaTag('h5');
+  const inputs = criaTag('div');
+  const alerta = warningHTML('');
+  inputs.classList.add("inputs");
+  login.classList.add("criador");
+  login.classList.add("sobrepor");
+  cardCriador.classList.add("card-criador");
+  cardCriador.classList.add("card");
+  criarRotina.innerText = 'logar na aplicação';
+  inputs.appendChild(criaInput('usuario','usuario','text'));
+  inputs.appendChild(criaInput('senha','senha','text'));
+  inputs.appendChild(criaButton('logar','submit','btn','btn-outline-success','logar'));
+  inputs.appendChild(criaButton('cancelar','submit','btn','btn-outline-danger','cancelar-criar'));
+  cardCriador.appendChild(criarRotina);
+  cardCriador.appendChild(alerta);
+  cardCriador.appendChild(inputs);
+  login.appendChild(cardCriador);
+  return login;
+}
 /* estrutura do criador de timers
 <div class="criador">
       <div class="card card-criador">
