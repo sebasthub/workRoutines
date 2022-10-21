@@ -111,6 +111,7 @@
     const tempoDois = document.querySelector('.segundo-tempo');
     if (tempoUm.value <= 0) return null;
     tempos.push(criaTempo(nome.value,Number(tempoUm.value),Number(tempoDois.value)));
+    postTempo(criaTempo(nome.value,Number(tempoUm.value),Number(tempoDois.value)));
     return true;
   }
   function save(id,salvo) {
@@ -150,5 +151,13 @@ function login(complemento){
   save('usuario',user);
   console.log(user);
 }
-
+function postTempo (tempo){
+  var url = `http://localhost:8080/tempos`;
+  tempo.idUsuario = user.id;
+  const xhttp = new XMLHttpRequest();
+  xhttp.open("POST", url, false);
+  xhttp.setRequestHeader("Accept", "application/json");
+  xhttp.setRequestHeader("Content-Type", "application/json");
+  xhttp.send(JSON.stringify(tempo));
+}
 })();
