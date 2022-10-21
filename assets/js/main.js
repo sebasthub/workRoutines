@@ -35,7 +35,6 @@
       removeCriador();
       manipulaFundoPreto(false);
       iniciaPrograma();
-      save('tempos',tempos);
       console.log(tempos);
     }
     if(el.classList.contains('iniciar')){
