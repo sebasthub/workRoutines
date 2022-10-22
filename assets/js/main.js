@@ -1,19 +1,24 @@
 (function() {
   const content = document.querySelector('.content');
   let user = load('usuario') != null ? load('usuario') : null;
-  let tempos = buscarTempos(user.id) != null ? buscarTempos(user.id) : [];
+  let tempos = user != null ? buscarTempos(user.id) : [];
   let trava = false;
   iniciaPrograma()
   document.addEventListener('click',function (e){
     const el = e.target;
     if(el.classList.contains('logar')){
-      const usuario = document.querySelector('.usuario');
-      const senha = document.querySelector('.senha');
-      login(usuario.value+senha.value);
+        const usuario = document.querySelector('.usuario');
+        const senha = document.querySelector('.senha');
+        login(usuario.value+senha.value);
     }
     if(el.classList.contains('Chama-Login')){
-      manipulaFundoPreto(true,content);
-      content.appendChild(criaLogin());
+      if (user != null) {
+        save('usuario',null);
+        window.location.href = "index.html";
+      }else {
+        manipulaFundoPreto(true,content);
+        content.appendChild(criaLogin());
+      }
     }
     if(el.classList.contains('chama-criador')){
       console.log('apertado');
@@ -56,6 +61,9 @@
     let counter = 0;
     const divTimers = document.querySelector('.divTimers');
     divTimers.innerHTML = '';
+    if (user == null) {
+      document.getElementById('imagemLogin').src = `assets/img/login_FILL0_wght400_GRAD0_opsz48.svg`
+    }
     console.log(tempos);
     if (tempos){
       for (const obj of tempos) {
