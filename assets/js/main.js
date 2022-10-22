@@ -6,10 +6,21 @@
   iniciaPrograma()
   document.addEventListener('click',function (e){
     const el = e.target;
+    if(el.classList.contains('registrar')){
+      removeCriador();
+      content.appendChild(criaRegistrar());
+    }
+    if(el.classList.contains('criar-conta')){
+      const usuario = document.querySelector('.usuario');
+      const senha = document.querySelector('.senha');
+      postUsuario(usuario.value+senha.value);
+      removeCriador()
+      manipulaFundoPreto(false);
+    }
     if(el.classList.contains('logar')){
-        const usuario = document.querySelector('.usuario');
-        const senha = document.querySelector('.senha');
-        login(usuario.value+senha.value);
+      const usuario = document.querySelector('.usuario');
+      const senha = document.querySelector('.senha');
+      login(usuario.value+senha.value);
     }
     if(el.classList.contains('Chama-Login')){
       if (user != null) {
@@ -176,5 +187,15 @@ function buscarTempos(id) {
   console.log(xhttp.responseText);
   let json = JSON.parse(xhttp.responseText);
   return json;
+}
+function postUsuario(usuario,senha) {
+  const usuarioJson = {usuario: usuario, senha: usuario+senha}
+  var url = `http://localhost:8080/usuarios/`;
+  const xhttp = new XMLHttpRequest();
+  xhttp.open("POST", url, false);
+  xhttp.setRequestHeader("Accept", "application/json");
+  xhttp.setRequestHeader("Content-Type", "application/json");
+  xhttp.send(JSON.stringify(usuarioJson));
+  console.log(`criado`);
 }
 })();

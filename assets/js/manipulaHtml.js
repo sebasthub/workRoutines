@@ -129,7 +129,8 @@ function criaLogin() {
   const cardCriador = criaTag('div');
   const criarRotina = criaTag('h5');
   const inputs = criaTag('div');
-  const alerta = warningHTML('');
+  const alerta = warningHTML('se não tiver conta clicke aqui');
+  alerta.classList.add("registrar")
   inputs.classList.add("inputs");
   login.classList.add("criador");
   login.classList.add("sobrepor");
@@ -139,6 +140,29 @@ function criaLogin() {
   inputs.appendChild(criaInput('usuario','usuario','text'));
   inputs.appendChild(criaInput('senha','senha','text'));
   inputs.appendChild(criaButton('logar','submit','btn','btn-outline-success','logar'));
+  inputs.appendChild(criaButton('cancelar','submit','btn','btn-outline-danger','cancelar-criar'));
+  cardCriador.appendChild(criarRotina);
+  cardCriador.appendChild(alerta);
+  cardCriador.appendChild(inputs);
+  login.appendChild(cardCriador);
+  return login;
+}
+
+function criaRegistrar() {
+  const login = criaTag('div');
+  const cardCriador = criaTag('div');
+  const criarRotina = criaTag('h5');
+  const inputs = criaTag('div');
+  const alerta = warningHTML('');
+  inputs.classList.add("inputs");
+  login.classList.add("criador");
+  login.classList.add("sobrepor");
+  cardCriador.classList.add("card-criador");
+  cardCriador.classList.add("card");
+  criarRotina.innerText = 'Registrar conta';
+  inputs.appendChild(criaInput('usuario','usuario','text'));
+  inputs.appendChild(criaInput('senha','senha','text'));
+  inputs.appendChild(criaButton('criar','submit','btn','btn-outline-success','criar-conta'));
   inputs.appendChild(criaButton('cancelar','submit','btn','btn-outline-danger','cancelar-criar'));
   cardCriador.appendChild(criarRotina);
   cardCriador.appendChild(alerta);
