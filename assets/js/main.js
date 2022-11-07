@@ -13,7 +13,7 @@
     if(el.classList.contains('criar-conta')){
       const usuario = document.querySelector('.usuario');
       const senha = document.querySelector('.senha');
-      postUsuario(usuario.value+senha.value);
+      postUsuario(usuario.value,senha.value);
       removeCriador()
       manipulaFundoPreto(false);
     }
@@ -154,24 +154,25 @@
   function criaUser(id,usuario) {
     return{
         id:id,
-        usuario:usuario,
+        login:usuario,
     }
   }
 function login(complemento){
-  var url = `http://localhost:8080/usuarios/login/${complemento}`;//Sua URL
+  var url = `http://127.0.0.1:8000/usuario/login/${complemento}`;//Sua URL
 
   var xhttp = new XMLHttpRequest();
   xhttp.open("GET", url, false);
   xhttp.send();
   console.log(xhttp.responseText);
   let json = JSON.parse(xhttp.responseText);
-  user = criaUser(json.id,json.usuario);
+  console.log(json);
+  user = criaUser(json._id,json.login);
   save('usuario',user);
   window.location.href = "index.html";
 }
 function postTempo (tempo){
-  var url = `http://localhost:8080/tempos`;
-  tempo.idUsuario = user.id;
+  var url = `http://localhost:8000/tempos`;
+  tempo.usuario = user.id;
   const xhttp = new XMLHttpRequest();
   xhttp.open("POST", url, false);
   xhttp.setRequestHeader("Accept", "application/json");
@@ -179,7 +180,7 @@ function postTempo (tempo){
   xhttp.send(JSON.stringify(tempo));
 }
 function buscarTempos(id) {
-  var url = `http://localhost:8080/tempos/${id}`;//Sua URL
+  var url = `http://localhost:8000/tempos/${id}`;//Sua URL
 
   var xhttp = new XMLHttpRequest();
   xhttp.open("GET", url, false);
@@ -189,8 +190,9 @@ function buscarTempos(id) {
   return json;
 }
 function postUsuario(usuario,senha) {
-  const usuarioJson = {usuario: usuario, senha: usuario+senha}
-  var url = `http://localhost:8080/usuarios/`;
+  const usuarioJson = {login: usuario, senha: usuario+senha}
+  console.log(usuarioJson);
+  var url = `http://localhost:8000/usuario/`;
   const xhttp = new XMLHttpRequest();
   xhttp.open("POST", url, false);
   xhttp.setRequestHeader("Accept", "application/json");
