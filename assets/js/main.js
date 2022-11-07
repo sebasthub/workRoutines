@@ -158,7 +158,7 @@
     }
   }
 function login(complemento){
-  var url = `http://127.0.0.1:8000/usuario/login/${complemento}`;//Sua URL
+  var url = `https://work-routines-backend.herokuapp.com/usuario/login/${complemento}`;//Sua URL
 
   var xhttp = new XMLHttpRequest();
   xhttp.open("GET", url, false);
@@ -170,7 +170,7 @@ function login(complemento){
   window.location.href = "index.html";
 }
 function postTempo (tempo){
-  var url = `http://localhost:8000/tempos`;
+  var url = `https://work-routines-backend.herokuapp.com/tempos`;
   tempo.usuario = user.id;
   const xhttp = new XMLHttpRequest();
   xhttp.open("POST", url, false);
@@ -179,7 +179,7 @@ function postTempo (tempo){
   xhttp.send(JSON.stringify(tempo));
 }
 function buscarTempos(id) {
-  var url = `http://localhost:8000/tempos/${id}`;//Sua URL
+  var url = `https://work-routines-backend.herokuapp.com/tempos/${id}`;//Sua URL
 
   var xhttp = new XMLHttpRequest();
   xhttp.open("GET", url, false);
@@ -190,7 +190,7 @@ function buscarTempos(id) {
 }
 function postUsuario(usuario,senha) {
   const usuarioJson = {login: usuario, senha: usuario+senha}
-  var url = `http://localhost:8000/usuario/`;
+  var url = `https://work-routines-backend.herokuapp.com/usuario/`;
   const xhttp = new XMLHttpRequest();
   xhttp.open("POST", url, false);
   xhttp.setRequestHeader("Accept", "application/json");
