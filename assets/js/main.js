@@ -165,7 +165,6 @@ function login(complemento){
   xhttp.send();
   console.log(xhttp.responseText);
   let json = JSON.parse(xhttp.responseText);
-  console.log(json);
   user = criaUser(json._id,json.login);
   save('usuario',user);
   window.location.href = "index.html";
@@ -191,7 +190,6 @@ function buscarTempos(id) {
 }
 function postUsuario(usuario,senha) {
   const usuarioJson = {login: usuario, senha: usuario+senha}
-  console.log(usuarioJson);
   var url = `http://localhost:8000/usuario/`;
   const xhttp = new XMLHttpRequest();
   xhttp.open("POST", url, false);
